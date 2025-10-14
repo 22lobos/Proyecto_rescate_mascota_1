@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    bottomBar = { BottomBar(navController) } // ✅ pasamos el controlador aquí
+                    bottomBar = { BottomBar(navController) }
                 ) { innerPadding ->
                     Box(Modifier.padding(innerPadding)) {
                         AppNavGraph(navController = navController)

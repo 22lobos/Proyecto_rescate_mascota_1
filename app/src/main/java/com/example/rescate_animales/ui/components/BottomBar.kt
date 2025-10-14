@@ -15,7 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.rescate_animales.navigation.Route
 
 @Composable
-fun BottomBar(navController: NavController) {   // 👈 Recibe el controlador
+fun BottomBar(navController: NavController) {   //  Recibe el controlador
     val items = listOf(
         Route.Home to Icons.Default.Home,
         Route.Publish to Icons.Default.AddCircle,
