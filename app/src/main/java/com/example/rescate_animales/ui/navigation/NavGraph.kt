@@ -8,7 +8,8 @@ import com.example.rescate_animales.ui.screens.*
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Route.Home.path) {
+    NavHost(navController = navController, startDestination = Route.Login.path) { //  Login
+        composable(Route.Login.path) { LoginScreen(navController) }
         composable(Route.Home.path) { HomeScreen(navController) }
         composable(Route.Publish.path) { PublishScreen() }
         composable(Route.Notifications.path) { NotificationsScreen() }
