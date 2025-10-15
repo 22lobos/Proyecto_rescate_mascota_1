@@ -97,9 +97,10 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(Modifier.height(16.dp))
 
-        TextButton(onClick = { /* TODO: navegar a Registro */ }) {
+        TextButton(onClick = { navController.navigate(Route.Register.path) }) {
             Text("Crear cuenta")
         }
+
         TextButton(onClick = { /* TODO: navegar a Recuperar contraseña */ }) {
             Text("¿Olvidó la contraseña?")
         }
