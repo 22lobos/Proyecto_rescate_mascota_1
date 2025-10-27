@@ -18,7 +18,7 @@ import com.example.rescate_animales.navigation.Route   // ✅ IMPORTA ESTA Route
 @Composable
 fun LoginScreen(navController: NavController) {
 
-    // ✅ Estado que sobrevive a la rotación
+    // Estado que sobrevive a la rotación
     var email by rememberSaveable { mutableStateOf("") }
     var pass by rememberSaveable { mutableStateOf("") }
     var passVisible by rememberSaveable { mutableStateOf(false) }
