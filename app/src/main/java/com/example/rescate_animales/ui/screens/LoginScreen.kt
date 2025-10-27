@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -12,14 +13,16 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.rescate_animales.R
-import com.example.rescate_animales.navigation.Route
+import com.example.rescate_animales.navigation.Route   // ✅ IMPORTA ESTA Route
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var email by remember { mutableStateOf("") }
-    var pass by remember { mutableStateOf("") }
-    var passVisible by remember { mutableStateOf(false) }
-    var error by remember { mutableStateOf<String?>(null) }
+
+    // ✅ Estado que sobrevive a la rotación
+    var email by rememberSaveable { mutableStateOf("") }
+    var pass by rememberSaveable { mutableStateOf("") }
+    var passVisible by rememberSaveable { mutableStateOf(false) }
+    var error by rememberSaveable { mutableStateOf<String?>(null) }
 
     Column(
         modifier = Modifier
@@ -29,7 +32,6 @@ fun LoginScreen(navController: NavController) {
     ) {
         Spacer(Modifier.height(8.dp))
 
-        // Logo (asegúrate de tener res/drawable/logo_pet_rescue.png)
         Image(
             painter = painterResource(id = R.drawable.logo_pet_rescue),
             contentDescription = "Logo Pet Rescue",
@@ -42,7 +44,6 @@ fun LoginScreen(navController: NavController) {
         Text("Iniciar sesión", style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(16.dp))
 
-        // Correo (sin KeyboardOptions para evitar errores)
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
@@ -54,7 +55,6 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(Modifier.height(12.dp))
 
-        // Contraseña con botón de texto para mostrar/ocultar (sin íconos)
         OutlinedTextField(
             value = pass,
             onValueChange = { pass = it },
@@ -101,7 +101,10 @@ fun LoginScreen(navController: NavController) {
             Text("Crear cuenta")
         }
 
-        TextButton(onClick = { /* TODO: navegar a Recuperar contraseña */ }) {
+        // ✅ Ahora navega a la pantalla de recuperación
+        TextButton(onClick = {
+            navController.navigate(Route.Recover.path)
+        }) {
             Text("¿Olvidó la contraseña?")
         }
     }

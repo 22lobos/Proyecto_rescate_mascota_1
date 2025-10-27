@@ -8,4 +8,6 @@ sealed class Route(val path: String) {
     object Publish : Route("publish")
     object Notifications : Route("notifications")
     object Profile : Route("profile")
+
+    object Recover : Route("recover")
 }

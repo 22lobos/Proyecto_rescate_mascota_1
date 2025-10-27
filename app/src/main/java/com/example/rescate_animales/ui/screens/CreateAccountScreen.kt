@@ -1,6 +1,4 @@
-
 @file:OptIn(ExperimentalMaterial3Api::class)
-
 
 package com.example.rescate_animales.ui.screens
 
@@ -16,6 +14,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable   // ✅ IMPORT CLAVE
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -35,23 +34,25 @@ fun CreateAccountScreen(
     onRegister: (RegisterUiData) -> Unit = {}
 ) {
     val focus = LocalFocusManager.current
-    var nombre by remember { mutableStateOf("") }
-    var apellido by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var telefono by remember { mutableStateOf("") }
-    var comuna by remember { mutableStateOf("") }
-    var region by remember { mutableStateOf("") }
-    var pass by remember { mutableStateOf("") }
-    var pass2 by remember { mutableStateOf("") }
-    var showPass by remember { mutableStateOf(false) }
-    var showPass2 by remember { mutableStateOf(false) }
-    var visibilidad by remember { mutableStateOf(Visibilidad.PÚBLICO) }
 
-    // errores
-    var errEmail by remember { mutableStateOf<String?>(null) }
-    var errPass by remember { mutableStateOf<String?>(null) }
-    var errPass2 by remember { mutableStateOf<String?>(null) }
-    var errNombre by remember { mutableStateOf<String?>(null) }
+    // ✅ Cambiados a rememberSaveable para persistir en rotación
+    var nombre by rememberSaveable { mutableStateOf("") }
+    var apellido by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var telefono by rememberSaveable { mutableStateOf("") }
+    var comuna by rememberSaveable { mutableStateOf("") }
+    var region by rememberSaveable { mutableStateOf("") }
+    var pass by rememberSaveable { mutableStateOf("") }
+    var pass2 by rememberSaveable { mutableStateOf("") }
+    var showPass by rememberSaveable { mutableStateOf(false) }
+    var showPass2 by rememberSaveable { mutableStateOf(false) }
+    var visibilidad by rememberSaveable { mutableStateOf(Visibilidad.PÚBLICO) }
+
+    // ✅ Errores también persistentes
+    var errEmail by rememberSaveable { mutableStateOf<String?>(null) }
+    var errPass by rememberSaveable { mutableStateOf<String?>(null) }
+    var errPass2 by rememberSaveable { mutableStateOf<String?>(null) }
+    var errNombre by rememberSaveable { mutableStateOf<String?>(null) }
 
     fun validar(): Boolean {
         errNombre = if (nombre.trim().isEmpty()) "Requerido" else null
@@ -211,7 +212,7 @@ fun CreateAccountScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            // Visibilidad
+            // Visibilidad (chips)
             Spacer(Modifier.height(6.dp))
             ExposedDropdownMenuBox(
                 expanded = false,
@@ -292,7 +293,7 @@ fun CreateAccountScreen(
 }
 
 private val EMAIL_REGEX =
-    Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}\$")
+    Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
 
 data class RegisterUiData(
     val nombre: String,
